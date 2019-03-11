@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ambient Noise Generator</title>
+        <style>
+            body {
+                background: #66b1e0;
+                font-family: 'Alef';
+            }
+
+            h1 {
+                font-family: 'Alef';
+                font-size: 64px;
+                white-space: initial;
+                text-align: center;
+                color: #e3bf2d;
+            }
+
+            .main {
+                margin-left: auto;
+                margin-right: auto;
+                overflow: hidden;
+            }
+
+            .send-left {
+                float: left !important;
+            }
+
+            .send-right {
+                float:right !important;
+            }
+
+            .top-bar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 5; 
+                /*background-color: black;
+                color: white;*/
+                white-space: nowrap;
+                overflow: hidden;
+            }
+            
+            .bar-item{
+                padding: 8px 16px;
+                width: auto;
+                display: inline-block;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+
+            .grid-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+                grid-gap: 30px;
+                padding: 10px;
+            }
+
+            .sample-icon{
+                margin: auto !important;
+                width: 100% !important;
+                position: relative !important;
+                text-align: center !important;
+                font-size: 10em !important;
+            }
+
+            .sample-volume{
+                width: 168px;
+                margin: auto;
+                position:relative;
+            }
+
+            /*
+                For overwriting the standard range form.
+            */
+            .slider {
+                /*-webkit-appearance: none;*/
+                width: 100%;
+                height: 5px;
+                border-radius: 5px;  
+                background: rgba(255,255,255,.3);
+                outline: none;
+                opacity: 0.7;
+                /*-webkit-transition: .2s;*/
+                transition: opacity .2s;
+            }
+
+            .slider::-webkit-slider-thumb {
+                /*-webkit-appearance: none;*/
+                appearance: none;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%; 
+                background: black;
+                cursor: pointer;
+            }
+
+            .slider::-moz-range-thumb {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: black;
+                cursor: pointer;
+            }
+
+            /*
+                For the three way toggle.
+            */
+            .three-state-button{
+                text-align: center;
+            }
+
+            .toggle_radio{
+                position: relative;
+                background: rgba(255,255,255,.1);
+                margin: 4px auto;
+                overflow: hidden;
+                padding: 0 !important;
+                /*-webkit-border-radius: 50px;
+                -moz-border-radius: 50px;*/
+                border-radius: 50px;
+                position: relative;
+                height: 26px;
+                width: 168px;
+            }
+
+            .toggle_radio > * {
+                float: left;
+            }
+
+            .toggle_radio input[type=radio]{
+                display: none;
+                /*position: fixed;*/
+            }
+
+            .toggle_radio label{
+                font-family: Arial, Helvetica, sans-serif;
+                color: rgba(255,255,255,.9);
+                z-index: 0;
+                display: block;
+                width: 50px;
+                height: 20px;
+                margin: 3px 3px;
+                /*-webkit-border-radius: 50px;
+                -moz-border-radius: 50px;*/
+                border-radius: 50px;
+                cursor: pointer;
+                z-index: 1;
+                /*background: rgba(0,0,0,.1);*/
+                text-align: center;
+                /*margin: 0 2px;*/
+                /*background: blue;*/ /*make it blue*/
+            }
+
+            .toggle_option_slider1{
+                /*display: none;*/
+                /*background: red;*/
+                width: 50px;
+                height: 20px;
+                position: absolute;
+                top: 3px;
+                /*-webkit-border-radius: 50px;
+                -moz-border-radius: 50px;*/
+                border-radius: 50px;
+                /*-webkit-transition: all .4s ease;
+                -moz-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                -ms-transition: all .4s ease;*/
+                transition: all .4s ease;
+            }
+
+            #low1:checked ~ .toggle_option_slider1{
+                background: rgba(255,255,255,.3);
+                left: 3px;
+            }
+
+            #med1:checked ~ .toggle_option_slider1{
+                background: rgba(255,255,255,.3);
+                left: 59px;
+            }
+
+            #high1:checked ~ .toggle_option_slider1{
+                background: rgba(255,255,255,.3);
+                left: 114px;
+            }
+
+
+            .toggle_option_slider2{
+                /*display: none;*/
+                /*background: red;*/
+                width: 50px;
+                height: 20px;
+                position: absolute;
+                top: 3px;
+                /*-webkit-border-radius: 50px;
+                -moz-border-radius: 50px;*/
+                border-radius: 50px;
+                /*-webkit-transition: all .4s ease;
+                -moz-transition: all .4s ease;
+                -o-transition: all .4s ease;
+                -ms-transition: all .4s ease;*/
+                transition: all .4s ease;
+            }
+
+            #low2:checked ~ .toggle_option_slider2{
+                background: rgba(255,255,255,.3);
+                left: 3px;
+            }
+
+            #med2:checked ~ .toggle_option_slider2{
+                background: rgba(255,255,255,.3);
+                left: 59px;
+            }
+
+            #high2:checked ~ .toggle_option_slider2{
+                background: rgba(255,255,255,.3);
+                left: 114px;
+            }
+        </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='https://fonts.googleapis.com/css?family=Alef' rel='stylesheet'>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'>
+    </head>
+    
+    <body class="body">
+        <!--Top Bar-->
+        <div class="top-bar">
+            <div class="send-left">
+                <i class="bar-item material-icons">add</i>
+                <i class="bar-item material-icons">forward</i>
+                <i class="bar-item material-icons">save</i>
+            </div>
+            <div class="send-right">
+                <i class="bar-item material-icons">volume_down</i>
+                <div class="bar-item">
+                        <input class="slider" type="range" id="volume" min="0" max="10" step="1" value="">
+                </div>
+                <i class="bar-item material-icons">play_arrow</i>
+            </div>
+            
+        </div>
+
+        <div class="main">
+            <h1>Ambient Noise Generator</h1>
+            <div class="grid-container">
+
+                <div class="item1">
+                    <i class="sample-icon material-icons">whatshot</i>
+                    <div class="sample-volume">
+                        <input class="slider" type="range" id="volume1" min="0" max="10" step="1" value="">
+                    </div>
+                    <div class="three-state-button">
+                        <div class="toggle_radio">
+                            <input type="radio" class="toggle_option" id="low1" name="toggle_option">
+                            <input type="radio" checked class="toggle_option" id="med1" name="toggle_option">
+                            <input type="radio" class="toggle_option" id="high1" name="toggle_option">
+                            <label for="low1">Low</label>
+                            <label for="med1">Med</label>
+                            <label for="high1">High</label>
+                            <div class="toggle_option_slider1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item2">
+                    <i class="sample-icon fas fa-wind"></i>
+                    <div class="sample-volume">
+                        <input class="slider" type="range" id="volume2" min="0" max="10" step="1" value="">
+                    </div>
+                    <div class="three-state-button">
+                        <div class="toggle_radio">
+                            <input type="radio" class="toggle_option" id="low2" name="toggle_option">
+                            <input type="radio" checked class="toggle_option" id="med2" name="toggle_option">
+                            <input type="radio" class="toggle_option" id="high2" name="toggle_option">
+                            <label for="low2">Low</label>
+                            <label for="med2">Med</label>
+                            <label for="high2">High</label>
+                            <div class="toggle_option_slider2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item3">
+                    <i class="sample-icon material-icons">waves</i>
+                    <div class="sample-volume">
+                        <input class="slider" type="range" id="volume3" min="0" max="10" step="1" value="">
+                    </div>
+                    <div class="three-state-button">
+                        <div class="toggle_radio">
+                            <input type="radio" class="toggle_option" id="low3" name="toggle_option">
+                            <input type="radio" checked class="toggle_option" id="med3" name="toggle_option">
+                            <input type="radio" class="toggle_option" id="high3" name="toggle_option">
+                            <label for="first_toggle">Low</label>
+                            <label for="second_toggle">Med</label>
+                            <label for="third_toggle">High</label>
+                            <div class="toggle_option_slider">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item4">
+                    <i class="sample-icon material-icons">graphic_eq</i>
+                    <div class="sample-volume">
+                        <input class="slider" type="range" id="volume4" min="0" max="10" step="1" value="">
+                    </div>
+                    <div class="three-state-button">
+                        <div class="toggle_radio">
+                            <input type="radio" class="toggle_option" id="low4" name="toggle_option">
+                            <input type="radio" checked class="toggle_option" id="med4" name="toggle_option">
+                            <input type="radio" class="toggle_option" id="high4" name="toggle_option">
+                            <label for="first_toggle">Low</label>
+                            <label for="second_toggle">Med</label>
+                            <label for="third_toggle">High</label>
+                            <div class="toggle_option_slider">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item5">
+                    <div style="text-align: center; width: 100%">
+                        <img src=".\Assets\bird.png" width=160px height=160px>
+                    </div>
+                    <div class="sample-volume">
+                        <input class="slider" type="range" id="volume5" min="0" max="10" step="1" value="">
+                    </div>
+                    <div class="three-state-button">
+                        <div class="toggle_radio">
+                            <input type="radio" class="toggle_option" id="low5" name="toggle_option">
+                            <input type="radio" checked class="toggle_option" id="med5" name="toggle_option">
+                            <input type="radio" class="toggle_option" id="high5" name="toggle_option">
+                            <label for="first_toggle">Low</label>
+                            <label for="second_toggle">Med</label>
+                            <label for="third_toggle">High</label>
+                            <div class="toggle_option_slider">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item6">
+                    <i class="sample-icon fas fa-cloud-rain"></i>
+                    <div class="sample-volume">
+                        <input class="slider" type="range" id="volume6" min="0" max="10" step="1" value="">
+                    </div>
+                    <div class="three-state-button">
+                        <div class="toggle_radio">
+                            <input type="radio" class="toggle_option" id="low6" name="toggle_option">
+                            <input type="radio" checked class="toggle_option" id="med6" name="toggle_option">
+                            <input type="radio" class="toggle_option" id="high6" name="toggle_option">
+                            <label for="first_toggle">Low</label>
+                            <label for="second_toggle">Med</label>
+                            <label for="third_toggle">High</label>
+                            <div class="toggle_option_slider">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item7">
+                    <i class="sample-icon fas fa-car-side"></i>
+                    <div class="sample-volume">
+                        <input class="slider" type="range" id="volume7" min="0" max="10" step="1" value="">
+                    </div>
+                    <div class="three-state-button">
+                        <div class="toggle_radio">
+                            <input type="radio" class="toggle_option" id="low7" name="toggle_option">
+                            <input type="radio" checked class="toggle_option" id="med7" name="toggle_option">
+                            <input type="radio" class="toggle_option" id="high7" name="toggle_option">
+                            <label for="first_toggle">Low</label>
+                            <label for="second_toggle">Med</label>
+                            <label for="third_toggle">High</label>
+                            <div class="toggle_option_slider">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item8">
+                    <div style="text-align: center; width: 100%">
+                        <img src=".\Assets\waterfall.png" width=160px height=160px>
+                    </div>
+                    <div class="sample-volume">
+                        <input class="slider" type="range" id="volume8" min="0" max="10" step="1" value="">
+                    </div>
+                    <div class="three-state-button">
+                        <div class="toggle_radio">
+                            <input type="radio" class="toggle_option" id="low8" name="toggle_option">
+                            <input type="radio" checked class="toggle_option" id="med8" name="toggle_option">
+                            <input type="radio" class="toggle_option" id="high8" name="toggle_option">
+                            <label for="first_toggle">Low</label>
+                            <label for="second_toggle">Med</label>
+                            <label for="third_toggle">High</label>
+                            <div class="toggle_option_slider">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--
+            <div>
+                Icons made by <a href="https://www.flaticon.com/authors/google" title="Google">Google</a> 
+                from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by 
+                <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+            </div>
+        -->
+
+        
+
+    </body>
+</html>
