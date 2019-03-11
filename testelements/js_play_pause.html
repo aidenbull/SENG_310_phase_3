@@ -1,0 +1,31 @@
+<!-- javascript tester -->
+<!DOCTYPE html>
+<html>
+<body>
+	<p>
+		Click the picture to swap
+	</p>
+	<img id="swapImage" onclick="swap()" src="play.png" style="height: 85px; width: 85px">
+	
+	<audio src="waves.mp3" id="audio">
+	</audio>
+	
+	<script>
+		var swapCounter = 0;
+	
+		function swap() {
+			if(swapCounter%2 == 0){
+				document.getElementById("swapImage").src = "pause.png";
+				document.getElementById("audio").play();
+				console.log("playing");
+				swapCounter++;
+			}else{
+				document.getElementById("swapImage").src = "play.png";
+				document.getElementById("audio").pause();
+				console.log("pausing");
+				swapCounter--;
+			}
+		}
+	</script>	
+</body>
+</html>
