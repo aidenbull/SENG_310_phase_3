@@ -3,28 +3,103 @@
 <html>
 <body>
 	<p>
-		Click the picture to swap
+		Click image to play/pause
 	</p>
-	<img id="swapImage" onclick="swap()" src="play.png" style="height: 85px; width: 85px">
-	
-	<audio src="waves.mp3" id="audio">
-	</audio>
+	<div id="div1">
+		<!-- Object for play/pause button, initially set src to play -->
+		<img id="swapImage1" src="play.png" style="height: 85px; width: 85px" data-counter="0">
+		
+		<!-- audio files for low, med, and high respectively -->
+		<audio loop src="bells.mp3" id="audio1">
+		</audio>
+		<audio loop src="waves.mp3" id="audio2">
+		</audio>
+		<audio loop src="wilhelm.mp3" id="audio3">
+		</audio>
+		
+		<!-- slider object -->
+		<input type="range" min="0" max="100" value="50" class="slider" id="myRange1">
+		
+		<!-- button objects -->
+		<button type="button" id="low1">low</button>
+		<button type="button" id="med1">med</button>
+		<button type="button" id="high1">high</button>
+	</div>
 	
 	<script>
-		var swapCounter = 0;
+		//slider
+		var slider1 = document.getElementById("myRange1");
+		
+		//image object
+		var image1 = document.getElementById("swapImage1");
+		
+		//audio objects
+		var waves1 = document.getElementById("audio1");
+		var waves2 = document.getElementById("audio2");
+		var waves3 = document.getElementById("audio3");
+		
+		//set current sound to med by default
+		var currentSound1 = waves2;
+		
+		//button objects
+		var lowButton1 = document.getElementById("low1");
+		var medButton1 = document.getElementById("med1");
+		var highButton1 = document.getElementById("high1");
 	
-		function swap() {
-			if(swapCounter%2 == 0){
-				document.getElementById("swapImage").src = "pause.png";
-				document.getElementById("audio").play();
+		//script that is run when the play/pause button is clicked
+		image1.onclick = function() {
+			if(image1.getAttribute("data-counter") == 0){
+				//play current sound if paused
 				console.log("playing");
-				swapCounter++;
+				currentSound1.play();
+				currentSound1.volume = slider1.value/100;
+				image1.src = "pause.png";
+				image1.setAttribute("data-counter", 1);
 			}else{
-				document.getElementById("swapImage").src = "play.png";
-				document.getElementById("audio").pause();
+				//pause current sound if playing
 				console.log("pausing");
-				swapCounter--;
+				currentSound1.pause();
+				image1.src = "play.png";
+				image1.setAttribute("data-counter", 0);
 			}
+		}
+		
+		//pauses current sound (if one is playing), sets current audio to low and plays
+		lowButton1.onclick = function() {
+			console.log("playing low");
+			currentSound1.pause();
+			currentSound1 = waves1;
+			currentSound1.play();
+			currentSound1.volume = slider1.value/100;
+			image1.src = "pause.png";
+			image1.setAttribute("data-counter", 1);
+		}
+		
+		//pauses current sound (if one is playing), sets current audio to med and plays
+		medButton1.onclick = function() {
+			console.log("playing med");
+			currentSound1.pause();
+			currentSound1 = waves2;
+			currentSound1.play();
+			currentSound1.volume = slider1.value/100;
+			image1.src = "pause.png";
+			image1.setAttribute("data-counter", 1);
+		}
+		
+		//pauses current sound (if one is playing), sets current audio to high and plays
+		highButton1.onclick = function() {
+			console.log("playing high");
+			currentSound1.pause();
+			currentSound1 = waves3;
+			currentSound1.play();
+			currentSound1.volume = slider1.value/100;
+			image1.src = "pause.png";
+			image1.setAttribute("data-counter", 1);
+		}
+		
+		//updates volume whenever slider is changed
+		slider1.oninput = function() {
+			currentSound1.volume = slider1.value/100;
 		}
 	</script>	
 </body>
