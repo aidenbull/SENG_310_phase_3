@@ -35,7 +35,7 @@
                 top: 0;
                 left: 0;
                 width: 100%;
-                z-index: 5; 
+                z-index: 1; 
                 background-color: black;
                 color: white;
                 white-space: nowrap;
@@ -69,6 +69,40 @@
                 width: 168px;
                 margin: auto;
                 position:relative;
+            }
+
+            .modal-box{
+                display: none;
+                position: fixed;
+                left: 0;
+                right: 0;
+                z-index: 2;
+                width: 50%;
+                margin: 5% auto;
+                border: 1px solid grey;
+                background-color: gainsboro;
+            }
+
+            .modal-header{
+                padding: 4px 12px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 24px;
+                background-color: white;
+            }
+
+            .modal-content{
+                background-color: white;
+                height: 100%;
+                width: 100%;
+            }
+
+            .modal-text-box{
+                width: 70%;
+            }
+
+            .modal-button{
+                width: 20%;
+                float: right;
             }
 
             /*
@@ -431,9 +465,9 @@
         <!--Top Bar-->
         <div class="top-bar">
             <div class="send-left">
-                <i class="bar-item material-icons">add</i>
-                <i class="bar-item material-icons">forward</i>
-                <i class="bar-item material-icons">save</i>
+                <i id="import" onclick="importPopup()" class="bar-item material-icons">add</i>
+                <i id="export" onclick="exportPopup()" class="bar-item material-icons">forward</i>
+                <i id="save" class="bar-item material-icons">save</i>
             </div>
             <div class="send-right">
                 <i class="bar-item material-icons">volume_down</i>
@@ -442,8 +476,64 @@
                 </div>
                 <i class="bar-item material-icons">play_circle_outline</i>
             </div>
-            
         </div>
+
+        <div id="modal-import" class="modal-box">
+            <div class="modal-header">
+                Import...
+                <i style="padding: 8px; float: right;" class="fas fa-city"></i>
+            </div>
+            <div class="modal-content">
+                <div style="padding: 8px;" id="modal-import-icon-line">
+                    <input style="width: 70%" type="text" value="Icon Path">
+                    <button style="width: 20%; float: right;" type="button">Browse</button>
+                </div>
+                <div style="padding: 8px;" id="modal-import-sample-title">
+                    <input style="width: 70%" type="text" value="Sample Title">
+                    <button style="width: 20%; float: right;" type="button">Browse</button>
+                </div>
+                <div style="padding: 8px;" id="modal-import-sample-title">
+                    <input style="width: 70%" type="text" value="Sample Path">
+                    <button style="width: 20%; float: right;" type="button">Browse</button>
+                </div>
+                <div style="padding: 8px; float: right;">
+                    <button id="modal-import-confirm" onclick="popupClose(this)" type="button">Import</button>
+                    <button id="modal-import-close" onclick="popupClose(this)" type="button">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-export" class="modal-box">
+                <div class="modal-header">
+                    Export Current Preset...
+                    <i style="padding: 8px; float: right;" class="fas fa-city"></i>
+                </div>
+                <div class="modal-content">
+                    <div style="padding: 8px;" id="modal-export-time">
+                        Length: 
+                        <input style="width: 5%" type="text" value="0">
+                        hr
+                        <input style="width: 5%" type="text" value="0">
+                        min
+                        <input style="width: 5%" type="text" value="30">
+                        sec
+                    </div>
+                    <div style="padding: 8px;" id="modal-export-name">
+                        Filename:
+                        <input style="width: 50%" type="text" value="Filename">
+                        <select style="width: 20%; float: right;" name="codecs">
+                            <option value="mp3">MP3</option>
+                            <option value="wav">WAV</option>
+                            <option value="flac">FLAC</option>
+                            <option value="ogg">OGG</option>
+                        </select>
+                    </div>
+                    <div style="padding: 8px; float: right;">
+                        <button id="modal-export-confirm" onclick="popupClose(this)" type="button">Export</button>
+                        <button id="modal-export-close" onclick="popupClose(this)" type="button">Cancel</button>
+                    </div>
+                </div>
+            </div>
 
         <div class="main">
             <h1>Ambient Noise Generator</h1>
@@ -454,7 +544,7 @@
                     <audio loop src="ambientSounds/fire_medium.wav" id="medaudio1"></audio>
                     <audio loop src="ambientSounds/fire_heavy.wav" id="highaudio1"></audio>
 
-                    <i class="sample-icon material-icons" id="swapImage1" onclick="playPause(this, volume1)" data-counter="0" current-audio=medaudio1>whatshot</i>
+                    <i class="sample-icon material-icons" style="opacity:0.5" id="swapImage1" onclick="playPause(this, volume1)" data-counter="0" current-audio=medaudio1>whatshot</i>
                     <div class="sample-volume">
                         <input class="slider" oninput="sliderVolume(this, swapImage1)" type="range" id="volume1" min="0" max="100" step="1" value="0">
                     </div>
@@ -477,7 +567,7 @@
                     <audio loop src="ambientSounds/wind_medium.wav" id="medaudio2"></audio>
                     <audio loop src="ambientSounds/wind_heavy.wav" id="highaudio2"></audio>
 
-                    <i class="sample-icon fas fa-wind" id="swapImage2" onclick="playPause(this, volume2)" data-counter="0" current-audio=medaudio2></i>
+                    <i class="sample-icon fas fa-wind" style="opacity:0.5" id="swapImage2" onclick="playPause(this, volume2)" data-counter="0" current-audio=medaudio2></i>
                     <div class="sample-volume">
                         <input class="slider" oninput="sliderVolume(this, swapImage2)" type="range" id="volume2" min="0" max="100" step="1" value="0">
                     </div>
@@ -500,7 +590,7 @@
                     <audio loop src="ambientSounds/waves_medium.wav" id="medaudio3"></audio>
                     <audio loop src="ambientSounds/waves_heavy.wav" id="highaudio3"></audio>
 
-                    <i class="sample-icon material-icons" id="swapImage3" onclick="playPause(this, volume3)" data-counter="0" current-audio=medaudio3>waves</i>
+                    <i class="sample-icon material-icons" style="opacity:0.5" id="swapImage3" onclick="playPause(this, volume3)" data-counter="0" current-audio=medaudio3>waves</i>
                     <div class="sample-volume">
                         <input class="slider" oninput="sliderVolume(this, swapImage3)" type="range" id="volume3" min="0" max="100" step="1" value="0">
                     </div>
@@ -523,7 +613,7 @@
                     <audio loop src="ambientSounds/noise_pink.wav" id="medaudio4"></audio>
                     <audio loop src="ambientSounds/noise_brown.wav" id="highaudio4"></audio>
 
-                    <i class="sample-icon material-icons" id="swapImage4" onclick="playPause(this, volume4)" data-counter="0" current-audio=medaudio4>graphic_eq</i>
+                    <i class="sample-icon material-icons" style="opacity:0.5" id="swapImage4" onclick="playPause(this, volume4)" data-counter="0" current-audio=medaudio4>graphic_eq</i>
                     <div class="sample-volume">
                         <input class="slider" oninput="sliderVolume(this, swapImage4)" type="range" id="volume4" min="0" max="100" step="1" value="0">
                     </div>
@@ -547,7 +637,7 @@
                     <audio loop src="ambientSounds/birdsong_heavy.wav" id="highaudio5"></audio>
 
                     <div style="text-align: center; width: 100%">
-                        <img src=".\Assets\bird.png" width=160px height=160px id="swapImage5" onclick="playPause(this, volume5)" data-counter="0" current-audio=medaudio5>
+                        <img src=".\Assets\bird.png" style="opacity:0.5" width=160px height=160px id="swapImage5" onclick="playPause(this, volume5)" data-counter="0" current-audio=medaudio5>
                     </div>
                     <div class="sample-volume">
                         <input class="slider" oninput="sliderVolume(this, swapImage5)" type="range" id="volume5" min="0" max="100" step="1" value="0">
@@ -571,7 +661,7 @@
                     <audio loop src="ambientSounds/rain_medium.wav" id="medaudio6"></audio>
                     <audio loop src="ambientSounds/rain_heavy.wav" id="highaudio6"></audio>
 
-                    <i class="sample-icon fas fa-cloud-rain" id="swapImage6" onclick="playPause(this, volume6)" data-counter="0" current-audio=medaudio6></i>
+                    <i class="sample-icon fas fa-cloud-rain" style="opacity:0.5" id="swapImage6" onclick="playPause(this, volume6)" data-counter="0" current-audio=medaudio6></i>
                     <div class="sample-volume">
                         <input class="slider" oninput="sliderVolume(this, swapImage6)" type="range" id="volume6" min="0" max="100" step="1" value="0">
                     </div>
@@ -593,7 +683,7 @@
                     <audio loop src="ambientSounds/cars_medium.wav" id="medaudio7"></audio>
                     <audio loop src="ambientSounds/cars_heavy.wav" id="highaudio7"></audio>
 
-                    <i class="sample-icon fas fa-car-side" id="swapImage7" onclick="playPause(this, volume7)" data-counter="0" current-audio=medaudio7></i>
+                    <i class="sample-icon fas fa-car-side" style="opacity:0.5" id="swapImage7" onclick="playPause(this, volume7)" data-counter="0" current-audio=medaudio7></i>
                     <div class="sample-volume">
                         <input class="slider" oninput="sliderVolume(this, swapImage7)" type="range" id="volume7" min="0" max="100" step="1" value="0">
                     </div>
@@ -616,7 +706,7 @@
                     <audio loop src="ambientSounds/river_heavy.wav" id="highaudio8"></audio>
 
                     <div style="text-align: center; width: 100%">
-                        <img src=".\Assets\waterfall.png" width=160px height=160px id="swapImage8" onclick="playPause(this, volume8)" data-counter="0" current-audio=medaudio8>
+                        <img src=".\Assets\waterfall.png" style="opacity:0.5" width=160px height=160px id="swapImage8" onclick="playPause(this, volume8)" data-counter="0" current-audio=medaudio8>
                     </div>
                     <div class="sample-volume">
                         <input class="slider" oninput="sliderVolume(this, swapImage8)" type="range" id="volume8" min="0" max="100" step="1" value="0">
@@ -656,13 +746,13 @@
                 currentSound.play();
                 currentSound.volume = slider.value/10;
                 elem.setAttribute("data-counter", 1);
-                elem.style.opacity = "0.5";
+                elem.style.opacity = "1";
             }else{
                 //pause current sound if playing
                 console.log("pausing");
                 currentSound.pause();
                 elem.setAttribute("data-counter", 0);
-                elem.style.opacity = "1";
+                elem.style.opacity = "0.5";
             }
         }
         
@@ -682,6 +772,23 @@
             var currentSound = document.getElementById(image.getAttribute("current-audio"));
             currentSound.volume = elem.value/100;
         }
+
+        
+        function importPopup(){
+            var modal = document.getElementById('modal-import');
+            modal.style.display = "block";
+        }
+
+        function exportPopup(){
+            var modal = document.getElementById('modal-export');
+            modal.style.display = "block";
+        }
+
+        function popupClose(elem){
+            var modal = document.getElementById(elem.id).parentElement.parentElement.parentElement;
+            modal.style.display = "none";
+        }
+        
     </script>   
     </body>
 </html>
