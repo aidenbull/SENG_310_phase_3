@@ -744,7 +744,7 @@
                 //play current sound if paused
                 console.log("playing");
                 currentSound.play();
-                currentSound.volume = slider.value/10;
+                currentSound.volume = slider.value/slider.max;
                 elem.setAttribute("data-counter", 1);
                 elem.style.opacity = "1";
             }else{
@@ -763,14 +763,14 @@
             image.setAttribute("current-audio", audio.id);
             currentSound = document.getElementById(image.getAttribute("current-audio"));
             currentSound.play();
-            currentSound.volume = slider.value/100;
+            currentSound.volume = slider.value/slider.max;
             image.setAttribute("data-counter", 1);
         }
         
         //updates volume whenever slider is changed
         function sliderVolume(elem, image) {
             var currentSound = document.getElementById(image.getAttribute("current-audio"));
-            currentSound.volume = elem.value/100;
+            currentSound.volume = elem.value/elem.max;
         }
 
         
