@@ -82,7 +82,6 @@
                 background: rgba(255,255,255,.3);
                 outline: none;
                 opacity: 0.7;
-                col
                 -webkit-transition: .2s;
                 transition: opacity .2s;
             }
@@ -101,7 +100,7 @@
                 width: 10px;
                 height: 10px;
                 border-radius: 50%;
-                background: black;
+                background: white;
                 cursor: pointer;
             }
 
@@ -439,7 +438,7 @@
             <div class="send-right">
                 <i class="bar-item material-icons">volume_down</i>
                 <div class="bar-item">
-                        <input class="slider" type="range" id="volume" min="0" max="10" step="1" value="">
+                        <input class="slider" type="range" id="volume" min="0" max="100" step="1" value="">
                 </div>
                 <i class="bar-item material-icons">play_circle_outline</i>
             </div>
@@ -457,7 +456,7 @@
 
                     <i class="sample-icon material-icons" id="swapImage1" onclick="playPause(this, volume1)" data-counter="0" current-audio=medaudio1>whatshot</i>
                     <div class="sample-volume">
-                        <input class="slider" oninput="sliderVolume(this, swapImage1)" type="range" id="volume1" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage1)" type="range" id="volume1" min="0" max="100" step="1" value="0">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
@@ -480,7 +479,7 @@
 
                     <i class="sample-icon fas fa-wind" id="swapImage2" onclick="playPause(this, volume2)" data-counter="0" current-audio=medaudio2></i>
                     <div class="sample-volume">
-                        <input class="slider" oninput="sliderVolume(this, swapImage2)" type="range" id="volume2" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage2)" type="range" id="volume2" min="0" max="100" step="1" value="0">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
@@ -503,7 +502,7 @@
 
                     <i class="sample-icon material-icons" id="swapImage3" onclick="playPause(this, volume3)" data-counter="0" current-audio=medaudio3>waves</i>
                     <div class="sample-volume">
-                        <input class="slider" oninput="sliderVolume(this, swapImage3)" type="range" id="volume3" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage3)" type="range" id="volume3" min="0" max="100" step="1" value="0">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
@@ -526,7 +525,7 @@
 
                     <i class="sample-icon material-icons" id="swapImage4" onclick="playPause(this, volume4)" data-counter="0" current-audio=medaudio4>graphic_eq</i>
                     <div class="sample-volume">
-                        <input class="slider" oninput="sliderVolume(this, swapImage4)" type="range" id="volume4" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage4)" type="range" id="volume4" min="0" max="100" step="1" value="0">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
@@ -551,7 +550,7 @@
                         <img src=".\Assets\bird.png" width=160px height=160px id="swapImage5" onclick="playPause(this, volume5)" data-counter="0" current-audio=medaudio5>
                     </div>
                     <div class="sample-volume">
-                        <input class="slider" oninput="sliderVolume(this, swapImage5)" type="range" id="volume5" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage5)" type="range" id="volume5" min="0" max="100" step="1" value="0">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
@@ -574,7 +573,7 @@
 
                     <i class="sample-icon fas fa-cloud-rain" id="swapImage6" onclick="playPause(this, volume6)" data-counter="0" current-audio=medaudio6></i>
                     <div class="sample-volume">
-                        <input class="slider" oninput="sliderVolume(this, swapImage6)" type="range" id="volume6" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage6)" type="range" id="volume6" min="0" max="100" step="1" value="0">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
@@ -596,7 +595,7 @@
 
                     <i class="sample-icon fas fa-car-side" id="swapImage7" onclick="playPause(this, volume7)" data-counter="0" current-audio=medaudio7></i>
                     <div class="sample-volume">
-                        <input class="slider" oninput="sliderVolume(this, swapImage7)" type="range" id="volume7" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage7)" type="range" id="volume7" min="0" max="100" step="1" value="0">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
@@ -620,7 +619,7 @@
                         <img src=".\Assets\waterfall.png" width=160px height=160px id="swapImage8" onclick="playPause(this, volume8)" data-counter="0" current-audio=medaudio8>
                     </div>
                     <div class="sample-volume">
-                        <input class="slider" oninput="sliderVolume(this, swapImage8)" type="range" id="volume8" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage8)" type="range" id="volume8" min="0" max="100" step="1" value="0">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
@@ -656,14 +655,14 @@
                 console.log("playing");
                 currentSound.play();
                 currentSound.volume = slider.value/10;
-                elem.src = "pause.png";
                 elem.setAttribute("data-counter", 1);
+                elem.style.opacity = "0.5";
             }else{
                 //pause current sound if playing
                 console.log("pausing");
                 currentSound.pause();
-                elem.src = "play.png";
                 elem.setAttribute("data-counter", 0);
+                elem.style.opacity = "1";
             }
         }
         
@@ -674,15 +673,14 @@
             image.setAttribute("current-audio", audio.id);
             currentSound = document.getElementById(image.getAttribute("current-audio"));
             currentSound.play();
-            currentSound.volume = slider.value/10;
-            image.src = "pause.png";
+            currentSound.volume = slider.value/100;
             image.setAttribute("data-counter", 1);
         }
         
         //updates volume whenever slider is changed
         function sliderVolume(elem, image) {
             var currentSound = document.getElementById(image.getAttribute("current-audio"));
-            currentSound.volume = elem.value/10;
+            currentSound.volume = elem.value/100;
         }
     </script>   
     </body>
