@@ -82,6 +82,7 @@
                 background: rgba(255,255,255,.3);
                 outline: none;
                 opacity: 0.7;
+                col
                 -webkit-transition: .2s;
                 transition: opacity .2s;
             }
@@ -92,7 +93,7 @@
                 width: 10px;
                 height: 10px;
                 border-radius: 50%; 
-                background: black;
+                background: white;
                 cursor: pointer;
             }
 
@@ -440,7 +441,7 @@
                 <div class="bar-item">
                         <input class="slider" type="range" id="volume" min="0" max="10" step="1" value="">
                 </div>
-                <i class="bar-item material-icons">play_arrow</i>
+                <i class="bar-item material-icons">play_circle_outline</i>
             </div>
             
         </div>
@@ -450,15 +451,19 @@
             <div class="grid-container">
 
                 <div class="item1">
-                    <i class="sample-icon material-icons">whatshot</i>
+                    <audio loop src="ambientSounds/fire_light.wav" id="lowaudio1"></audio>
+                    <audio loop src="ambientSounds/fire_medium.wav" id="medaudio1"></audio>
+                    <audio loop src="ambientSounds/fire_heavy.wav" id="highaudio1"></audio>
+
+                    <i class="sample-icon material-icons" id="swapImage1" onclick="playPause(this, volume1)" data-counter="0" current-audio=medaudio1>whatshot</i>
                     <div class="sample-volume">
-                        <input class="slider" type="range" id="volume1" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage1)" type="range" id="volume1" min="0" max="10" step="1" value="">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
-                            <input type="radio" class="toggle_option_1" id="low1" name="toggle_option_1">
-                            <input type="radio" checked class="toggle_option_1" id="med1" name="toggle_option_1">
-                            <input type="radio" class="toggle_option_1" id="high1" name="toggle_option_1">
+                            <input type="radio" onclick="intensityButton(lowaudio1, swapImage1, volume1)" class="toggle_option_1" id="low1" name="toggle_option_1">
+                            <input type="radio" onclick="intensityButton(medaudio1, swapImage1, volume1)" checked class="toggle_option_1" id="med1" name="toggle_option_1">
+                            <input type="radio" onclick="intensityButton(highaudio1, swapImage1, volume1)" class="toggle_option_1" id="high1" name="toggle_option_1">
                             <label for="low1">Low</label>
                             <label for="med1">Med</label>
                             <label for="high1">High</label>
@@ -469,15 +474,19 @@
                 </div>
 
                 <div class="item2">
-                    <i class="sample-icon fas fa-wind"></i>
+                    <audio loop src="ambientSounds/wind_light.mp3" id="lowaudio2"></audio>
+                    <audio loop src="ambientSounds/wind_medium.wav" id="medaudio2"></audio>
+                    <audio loop src="ambientSounds/wind_heavy.wav" id="highaudio2"></audio>
+
+                    <i class="sample-icon fas fa-wind" id="swapImage2" onclick="playPause(this, volume2)" data-counter="0" current-audio=medaudio2></i>
                     <div class="sample-volume">
-                        <input class="slider" type="range" id="volume2" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage2)" type="range" id="volume2" min="0" max="10" step="1" value="">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
-                            <input type="radio" class="toggle_option_2" id="low2" name="toggle_option_2">
-                            <input type="radio" checked class="toggle_option_2" id="med2" name="toggle_option_2">
-                            <input type="radio" class="toggle_option_2" id="high2" name="toggle_option_2">
+                            <input type="radio" onclick="intensityButton(lowaudio2, swapImage2, volume2)" class="toggle_option_2" id="low2" name="toggle_option_2">
+                            <input type="radio" onclick="intensityButton(medaudio2, swapImage2, volume2)" checked class="toggle_option_2" id="med2" name="toggle_option_2">
+                            <input type="radio" onclick="intensityButton(highaudio2, swapImage2, volume2)" class="toggle_option_2" id="high2" name="toggle_option_2">
                             <label for="low2">Low</label>
                             <label for="med2">Med</label>
                             <label for="high2">High</label>
@@ -488,15 +497,19 @@
                 </div>
 
                 <div class="item3">
-                    <i class="sample-icon material-icons">waves</i>
+                    <audio loop src="ambientSounds/waves_light.wav" id="lowaudio3"></audio>
+                    <audio loop src="ambientSounds/waves_medium.wav" id="medaudio3"></audio>
+                    <audio loop src="ambientSounds/waves_heavy.wav" id="highaudio3"></audio>
+
+                    <i class="sample-icon material-icons" id="swapImage3" onclick="playPause(this, volume3)" data-counter="0" current-audio=medaudio3>waves</i>
                     <div class="sample-volume">
-                        <input class="slider" type="range" id="volume3" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage3)" type="range" id="volume3" min="0" max="10" step="1" value="">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
-                            <input type="radio" class="toggle_option_3" id="low3" name="toggle_option_3">
-                            <input type="radio" checked class="toggle_option_3" id="med3" name="toggle_option_3">
-                            <input type="radio" class="toggle_option_3" id="high3" name="toggle_option_3">
+                            <input type="radio" onclick="intensityButton(lowaudio3, swapImage3, volume3)" class="toggle_option_3" id="low3" name="toggle_option_3">
+                            <input type="radio" onclick="intensityButton(medaudio3, swapImage3, volume3)" checked class="toggle_option_3" id="med3" name="toggle_option_3">
+                            <input type="radio" onclick="intensityButton(highaudio3, swapImage3, volume3)" class="toggle_option_3" id="high3" name="toggle_option_3">
                             <label for="low3">Low</label>
                             <label for="med3">Med</label>
                             <label for="high3">High</label>
@@ -507,15 +520,19 @@
                 </div>
 
                 <div class="item4">
-                    <i class="sample-icon material-icons">graphic_eq</i>
+                    <audio loop src="ambientSounds/noise_white.wav" id="lowaudio4"></audio>
+                    <audio loop src="ambientSounds/noise_pink.wav" id="medaudio4"></audio>
+                    <audio loop src="ambientSounds/noise_brown.wav" id="highaudio4"></audio>
+
+                    <i class="sample-icon material-icons" id="swapImage4" onclick="playPause(this, volume4)" data-counter="0" current-audio=medaudio4>graphic_eq</i>
                     <div class="sample-volume">
-                        <input class="slider" type="range" id="volume4" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage4)" type="range" id="volume4" min="0" max="10" step="1" value="">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
-                            <input type="radio" class="toggle_option_4" id="low4" name="toggle_option_4">
-                            <input type="radio" checked class="toggle_option_4" id="med4" name="toggle_option_4">
-                            <input type="radio" class="toggle_option_4" id="high4" name="toggle_option_4">
+                            <input type="radio" onclick="intensityButton(lowaudio4, swapImage4, volume4)" class="toggle_option_4" id="low4" name="toggle_option_4">
+                            <input type="radio" onclick="intensityButton(medaudio4, swapImage4, volume4)" checked class="toggle_option_4" id="med4" name="toggle_option_4">
+                            <input type="radio" onclick="intensityButton(highaudio4, swapImage4, volume4)" class="toggle_option_4" id="high4" name="toggle_option_4">
                             <label for="low4">Low</label>
                             <label for="med4">Med</label>
                             <label for="high4">High</label>
@@ -526,17 +543,21 @@
                 </div>
 
                 <div class="item5">
+                    <audio loop src="ambientSounds/birdsong_light.wav" id="lowaudio5"></audio>
+                    <audio loop src="ambientSounds/birdsong_medium.mp3" id="medaudio5"></audio>
+                    <audio loop src="ambientSounds/birdsong_heavy.wav" id="highaudio5"></audio>
+
                     <div style="text-align: center; width: 100%">
-                        <img src=".\Assets\bird.png" width=160px height=160px>
+                        <img src=".\Assets\bird.png" width=160px height=160px id="swapImage5" onclick="playPause(this, volume5)" data-counter="0" current-audio=medaudio5>
                     </div>
                     <div class="sample-volume">
-                        <input class="slider" type="range" id="volume5" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage5)" type="range" id="volume5" min="0" max="10" step="1" value="">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
-                            <input type="radio" class="toggle_option_5" id="low5" name="toggle_option_5">
-                            <input type="radio" checked class="toggle_option_5" id="med5" name="toggle_option_5">
-                            <input type="radio" class="toggle_option_5" id="high5" name="toggle_option_5">
+                            <input type="radio" onclick="intensityButton(lowaudio5, swapImage5, volume5)" class="toggle_option_5" id="low5" name="toggle_option_5">
+                            <input type="radio" onclick="intensityButton(medaudio5, swapImage5, volume5)" checked class="toggle_option_5" id="med5" name="toggle_option_5">
+                            <input type="radio" onclick="intensityButton(highaudio5, swapImage5, volume5)" class="toggle_option_5" id="high5" name="toggle_option_5">
                             <label for="low5">Low</label>
                             <label for="med5">Med</label>
                             <label for="high5">High</label>
@@ -547,15 +568,19 @@
                 </div>
 
                 <div class="item6">
-                    <i class="sample-icon fas fa-cloud-rain"></i>
+                    <audio loop src="ambientSounds/rain_light.wav" id="lowaudio6"></audio>
+                    <audio loop src="ambientSounds/rain_medium.wav" id="medaudio6"></audio>
+                    <audio loop src="ambientSounds/rain_heavy.wav" id="highaudio6"></audio>
+
+                    <i class="sample-icon fas fa-cloud-rain" id="swapImage6" onclick="playPause(this, volume6)" data-counter="0" current-audio=medaudio6></i>
                     <div class="sample-volume">
-                        <input class="slider" type="range" id="volume6" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage6)" type="range" id="volume6" min="0" max="10" step="1" value="">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
-                            <input type="radio" class="toggle_option_6" id="low6" name="toggle_option_6">
-                            <input type="radio" checked class="toggle_option_6" id="med6" name="toggle_option_6">
-                            <input type="radio" class="toggle_option_6" id="high6" name="toggle_option_6">
+                            <input type="radio" onclick="intensityButton(lowaudio6, swapImage6, volume6)" class="toggle_option_6" id="low6" name="toggle_option_6">
+                            <input type="radio" onclick="intensityButton(medaudio6, swapImage6, volume6)" checked class="toggle_option_6" id="med6" name="toggle_option_6">
+                            <input type="radio" onclick="intensityButton(highaudio6, swapImage6, volume6)" class="toggle_option_6" id="high6" name="toggle_option_6">
                             <label for="low6">Low</label>
                             <label for="med6">Med</label>
                             <label for="high6">High</label>
@@ -565,15 +590,19 @@
                     </div>
                 </div>
                 <div class="item7">
-                    <i class="sample-icon fas fa-car-side"></i>
+                    <audio loop src="ambientSounds/cars_light.wav" id="lowaudio7"></audio>
+                    <audio loop src="ambientSounds/cars_medium.wav" id="medaudio7"></audio>
+                    <audio loop src="ambientSounds/cars_heavy.wav" id="highaudio7"></audio>
+
+                    <i class="sample-icon fas fa-car-side" id="swapImage7" onclick="playPause(this, volume7)" data-counter="0" current-audio=medaudio7></i>
                     <div class="sample-volume">
-                        <input class="slider" type="range" id="volume7" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage7)" type="range" id="volume7" min="0" max="10" step="1" value="">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
-                            <input type="radio" class="toggle_option_7" id="low7" name="toggle_option_7">
-                            <input type="radio" checked class="toggle_option_7" id="med7" name="toggle_option_7">
-                            <input type="radio" class="toggle_option_7" id="high7" name="toggle_option_7">
+                            <input type="radio" onclick="intensityButton(lowaudio7, swapImage7, volume7)" class="toggle_option_7" id="low7" name="toggle_option_7">
+                            <input type="radio" onclick="intensityButton(medaudio7, swapImage7, volume7)" checked class="toggle_option_7" id="med7" name="toggle_option_7">
+                            <input type="radio" onclick="intensityButton(highaudio7, swapImage7, volume7)" class="toggle_option_7" id="high7" name="toggle_option_7">
                             <label for="low7">Low</label>
                             <label for="med7">Med</label>
                             <label for="high7">High</label>
@@ -583,17 +612,21 @@
                     </div>
                 </div>
                 <div class="item8">
+                    <audio loop src="ambientSounds/river_light.wav" id="lowaudio8"></audio>
+                    <audio loop src="ambientSounds/river_medium.wav" id="medaudio8"></audio>
+                    <audio loop src="ambientSounds/river_heavy.wav" id="highaudio8"></audio>
+
                     <div style="text-align: center; width: 100%">
-                        <img src=".\Assets\waterfall.png" width=160px height=160px>
+                        <img src=".\Assets\waterfall.png" width=160px height=160px id="swapImage8" onclick="playPause(this, volume8)" data-counter="0" current-audio=medaudio8>
                     </div>
                     <div class="sample-volume">
-                        <input class="slider" type="range" id="volume8" min="0" max="10" step="1" value="">
+                        <input class="slider" oninput="sliderVolume(this, swapImage8)" type="range" id="volume8" min="0" max="10" step="1" value="">
                     </div>
                     <div class="three-state-button">
                         <div class="toggle_radio">
-                            <input type="radio" class="toggle_option_8" id="low8" name="toggle_option_8">
-                            <input type="radio" checked class="toggle_option_8" id="med8" name="toggle_option_8">
-                            <input type="radio" class="toggle_option_8" id="high8" name="toggle_option_8">
+                            <input type="radio" onclick="intensityButton(lowaudio8, swapImage8, volume8)" class="toggle_option_8" id="low8" name="toggle_option_8">
+                            <input type="radio" onclick="intensityButton(medaudio8, swapImage8, volume8)" checked class="toggle_option_8" id="med8" name="toggle_option_8">
+                            <input type="radio" onclick="intensityButton(highaudio8, swapImage8, volume8)" class="toggle_option_8" id="high8" name="toggle_option_8">
                             <label for="low8">Low</label>
                             <label for="med8">Med</label>
                             <label for="high8">High</label>
@@ -614,6 +647,43 @@
         -->
 
         
-
+    <script>
+        //script that is run when the play/pause button is clicked
+        function playPause(elem, slider) {
+            var currentSound = document.getElementById(elem.getAttribute("current-audio"));
+            if(elem.getAttribute("data-counter") == 0){
+                //play current sound if paused
+                console.log("playing");
+                currentSound.play();
+                currentSound.volume = slider.value/10;
+                elem.src = "pause.png";
+                elem.setAttribute("data-counter", 1);
+            }else{
+                //pause current sound if playing
+                console.log("pausing");
+                currentSound.pause();
+                elem.src = "play.png";
+                elem.setAttribute("data-counter", 0);
+            }
+        }
+        
+        //pauses current sound (if one is playing), sets current audio and plays
+        function intensityButton(audio, image, slider) {
+            var currentSound = document.getElementById(image.getAttribute("current-audio"));
+            currentSound.pause();
+            image.setAttribute("current-audio", audio.id);
+            currentSound = document.getElementById(image.getAttribute("current-audio"));
+            currentSound.play();
+            currentSound.volume = slider.value/10;
+            image.src = "pause.png";
+            image.setAttribute("data-counter", 1);
+        }
+        
+        //updates volume whenever slider is changed
+        function sliderVolume(elem, image) {
+            var currentSound = document.getElementById(image.getAttribute("current-audio"));
+            currentSound.volume = elem.value/10;
+        }
+    </script>   
     </body>
 </html>
